@@ -1169,6 +1169,7 @@ int main(int argc, char **argv)
 
 	printf("Ver: %s\n", VERSION_STRING);
 	int opt;
+	int r;
 	int long_index = 0;
 	int rc_channel_no = 0;
 
@@ -1224,7 +1225,7 @@ int main(int argc, char **argv)
 			break;
 
 		case 'r':
-			int r=atoi(optarg);
+			r=atoi(optarg);
 			if (r>100){
 				enable_fast_layout=true;
 				r=r%100;
