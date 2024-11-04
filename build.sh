@@ -36,16 +36,16 @@ fi
 
 if [ "$1" = "goke" ]; then
 	DRV=$PWD/firmware/general/package/goke-osdrv-gk7205v200/files/lib
-	make -B CC=$GCC DRV=$DRV OUTPUT=$OUT $1
+	make -B CC=$GCC DRV=$DRV TOOLCHAIN=$PWD/toolchain/$CC OUTPUT=$OUT $1
 elif [ "$1" = "hisi" ]; then
 	DRV=$PWD/firmware/general/package/hisilicon-osdrv-hi3516ev200/files/lib
-	make -B CC=$GCC DRV=$DRV OUTPUT=$OUT $1
+	make -B CC=$GCC DRV=$DRV TOOLCHAIN=$PWD/toolchain/$CC OUTPUT=$OUT $1
 elif [ "$1" = "star6b0" ]; then
 	DRV=$PWD/firmware/general/package/sigmastar-osdrv-infinity6b0/files/lib
-	make -B CC=$GCC DRV=$DRV OUTPUT=$OUT $1
+	make -B CC=$GCC DRV=$DRV TOOLCHAIN=$PWD/toolchain/$CC OUTPUT=$OUT $1
 elif [ "$1" = "star6e" ]; then
 	DRV=$PWD/firmware/general/package/sigmastar-osdrv-infinity6e/files/lib
-	make -B CC=$GCC DRV=$DRV OUTPUT=$OUT $1
+	make -B CC=$GCC DRV=$DRV TOOLCHAIN=$PWD/toolchain/$CC OUTPUT=$OUT $1
 elif [ "$1" = "jetson" ]; then
 	DRV=$PWD
 	make DRV=$DRV OUTPUT=$OUT $1
