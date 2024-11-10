@@ -36,7 +36,7 @@ star6e:
 
 jetson:
 	$(eval SDK = ./sdk/gk7205v300)
-	$(eval CFLAGS += -D_x86)
+	$(eval CFLAGS += -D_x86 -D_jetson)
 	$(eval LIB = -lcsfml-graphics -lcsfml-window -lcsfml-system `pkg-config --libs cairo x11` -lm)
 	 
 	$(eval BUILD = $(CC) $(SRCS) -I $(SDK)/include -L $(DRV) $(CFLAGS) $(LIB) -levent_core -O0 -g -o $(OUTPUT)/msposd)

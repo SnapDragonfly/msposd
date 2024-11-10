@@ -74,6 +74,18 @@ int Init_x86(uint16_t *width, uint16_t *height) {
         forcefullscreen=false;
 #endif
 
+#ifdef _jetson
+		if (getenv("DISPLAY") == NULL) {
+			/*
+			 * Use default display screen, especially launch from console
+			 * ToDo: x86 linux should implement this code also, test needed.
+			 */
+			setenv("DISPLAY", ":0", 1);
+		}
+#endif
+
+
+
         display = XOpenDisplay(NULL);
         if (!display) {
             fprintf(stderr, "Cannot open display\n");
