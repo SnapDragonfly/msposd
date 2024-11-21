@@ -22,6 +22,12 @@ hisi:
 	$(eval LIB = -shared -ldnvqe -lmpi -lsecurec -lupvqe -lVoiceEngine)
 	$(BUILD)
 
+hi3536:
+	$(eval SDK = ./sdk/hi3536dv100)
+	$(eval CFLAGS += -D__HI3536__)
+	$(eval LIB = -shared -ldnvqe -lmpi -lupvqe -lVoiceEngine)
+	$(BUILD)
+
 star6b0:
 	$(eval SDK = ./sdk/infinity6)
 	$(eval CFLAGS += -D__SIGMASTAR__ -D__INFINITY6__ -D__INFINITY6B0__)

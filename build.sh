@@ -9,6 +9,8 @@ elif [[ "$1" == *"goke" ]]; then
 	CC=cortex_a7_thumb2-gcc13-musl-4_9
 elif [[ "$1" == *"hisi" ]]; then
 	CC=cortex_a7_thumb2-gcc13-musl-4_9
+elif [[ "$1" == *"hi3536" ]]; then
+	CC=cortex_a7-gcc13-glibc-4_9
 fi
 
 GCC=$PWD/toolchain/$CC/bin/arm-linux-gcc
@@ -34,6 +36,9 @@ if [ "$1" = "goke" ]; then
 elif [ "$1" = "hisi" ]; then
 	DRV=$PWD/firmware/general/package/hisilicon-osdrv-hi3516ev200/files/lib
 	make -B CC=$GCC DRV=$DRV TOOLCHAIN=$PWD/toolchain/$CC OUTPUT=$OUT $1
+elif [ "$1" = "hi3536" ]; then
+	DRV=$PWD/firmware/general/package/hisilicon-osdrv-hi3536dv100/files/lib
+	make -B CC=$GCC DRV=$DRV TOOLCHAIN=$PWD/toolchain/$CC OUTPUT=$OUT $1
 elif [ "$1" = "star6b0" ]; then
 	DRV=$PWD/firmware/general/package/sigmastar-osdrv-infinity6b0/files/lib
 	make -B CC=$GCC DRV=$DRV TOOLCHAIN=$PWD/toolchain/$CC OUTPUT=$OUT $1
@@ -47,6 +52,6 @@ elif [ "$1" = "x86" ]; then
 	DRV=$PWD
 	make DRV=$DRV OUTPUT=$OUT $1
 else
-	echo "Usage: $0 [goke|hisi|star6b0|star6e|jetson|x86]"
+	echo "Usage: $0 [goke|hisi|hi3536|star6b0|star6e|jetson|x86]"
 	exit 1
 fi
