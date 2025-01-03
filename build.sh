@@ -19,7 +19,7 @@ fi
 GCC=$PWD/toolchain/$CC/bin/arm-linux-gcc
 OUT=msposd
 
-if [[ "$1" != *"native"* && "$1" != *"rockhip"* ]]; then
+if [[ "$1" != *"native"* && "$1" != *"rockhip"* && "$1" != *"raspberry"* ]]; then
 	if [ ! -e toolchain/$CC ]; then
 		wget -c -q --show-progress $DL.$CC.tgz -P $PWD
 		mkdir -p toolchain/$CC

@@ -1141,6 +1141,17 @@ static bool first_wfb_read=true;
                 fscanf(stat, "%f %u", &fps, &bitrate);
                 fclose(stat);            
             }
+#elif _RASPBERRY
+            // Sample: frame=-2, fps=30.01, size=18668, filtered=3.85 Mbps, bitrate=4.48 Mbps
+            // Result: 30.01 18668
+            FILE *stat = popen("cat /proc/libcamera_proc  | awk -F', ' '{print $2, $3}' | awk -F'=| ' '{print $2, $4}'", "r");
+            if (stat == NULL) {
+                sscanf("34.91 14836", "%f %u", &fps, &bitrate);              
+            }else{
+                fscanf(stat, "%f %u", &fps, &bitrate);
+                bitrate = bitrate*fps*8/1000; // calculate bps rate
+                fclose(stat);            
+            }
 #else
             sscanf("34.91 14836", "%f %u", &fps, &bitrate);
 #endif            
