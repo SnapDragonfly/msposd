@@ -1141,7 +1141,7 @@ static bool first_wfb_read=true;
                 fscanf(stat, "%f %u", &fps, &bitrate);
                 fclose(stat);            
             }
-#elif _RASPBERRY
+#elif defined(_RASPBERRY)
             // Sample: frame=-2, fps=30.01, size=13528, bitrate=3.25 Mbps, fsize=16105, fbitrate=3.87 Mbps
             // Result(filtered): 30.01 16105
             // Result(raw):      30.01 13528
@@ -1207,6 +1207,16 @@ static bool first_wfb_read=true;
             unsigned short temp = GetTempSigmaStar();//1370 * (400 - ((unsigned short*)io_map)[0x2918 >> 1]) / 1000.0f + 27;
 #elif defined(__16CV300__)
             unsigned short temp = 0;// (((unsigned short*)io_map)[0x300A4 >> 1] - 125) / 806.0f * 165.0f - 40;
+#elif defined(_RASPBERRY)
+            unsigned short temp;
+            FILE *stat = popen("cat /sys/class/thermal/thermal_zone0/temp", "r");
+            if (stat == NULL) {
+                sscanf("1000", "%u", &temp);
+            }else{
+                fscanf(stat, "%u", &temp);
+                temp = temp/1000; // calculate temperature
+                fclose(stat);
+            }
 #else
             unsigned short temp = 0;//;(((unsigned short*)io_map)[0x280BC >> 1] - 117) / 798.0f * 165.0f - 40;
 #endif
