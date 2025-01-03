@@ -1142,9 +1142,10 @@ static bool first_wfb_read=true;
                 fclose(stat);            
             }
 #elif _RASPBERRY
-            // Sample: frame=-2, fps=30.01, size=18668, filtered=3.85 Mbps, bitrate=4.48 Mbps
-            // Result: 30.01 18668
-            FILE *stat = popen("cat /proc/libcamera_proc  | awk -F', ' '{print $2, $3}' | awk -F'=| ' '{print $2, $4}'", "r");
+            // Sample: frame=-2, fps=30.01, size=13528, bitrate=3.25 Mbps, fsize=16105, fbitrate=3.87 Mbps
+            // Result(filtered): 30.01 16105
+            // Result(raw):      30.01 13528
+            FILE *stat = popen("cat /proc/libcamera_proc  | awk -F', ' '{print $2, $5}' | awk -F'=| ' '{print $2, $4}'", "r");
             if (stat == NULL) {
                 sscanf("34.91 14836", "%f %u", &fps, &bitrate);              
             }else{
