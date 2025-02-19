@@ -2,7 +2,7 @@
 DL="https://github.com/OpenIPC/firmware/releases/download/toolchain/toolchain"
 
 if [ "$#" -ne 1 ]; then
-	echo "Usage: $0 [goke|hisi|star6b0|star6e|native]"
+	echo "Usage: $0 [goke|hisi|hi3536|star6b0|star6e|star6c|native]"
 	exit 1
 fi
 
@@ -10,10 +10,14 @@ if [[ "$1" == *"star6b0" ]]; then
 	CC=sigmastar-infinity6b0
 elif [[ "$1" == *"star6e" ]]; then
 	CC=sigmastar-infinity6e
+elif [[ "$1" == *"star6c" ]]; then
+	CC=sigmastar-infinity6c
 elif [[ "$1" == *"goke" ]]; then
 	CC=goke-gk7205v200
 elif [[ "$1" == *"hisi" ]]; then
 	CC=hisilicon-hi3516ev200
+elif [[ "$1" == *"hi3536" ]]; then
+	CC=hisilicon-hi3536dv100
 fi
 
 GCC=$PWD/toolchain/$CC/bin/arm-linux-gcc
@@ -39,11 +43,17 @@ if [ "$1" = "goke" ]; then
 elif [ "$1" = "hisi" ]; then
 	DRV=$PWD/firmware/general/package/hisilicon-osdrv-hi3516ev200/files/lib
 	make -B CC=$GCC DRV=$DRV TOOLCHAIN=$PWD/toolchain/$CC OUTPUT=$OUT $1
+elif [ "$1" = "hi3536" ]; then
+	DRV=$PWD/firmware/general/package/hisilicon-osdrv-hi3536dv100/files/lib
+	make -B CC=$GCC DRV=$DRV TOOLCHAIN=$PWD/toolchain/$CC OUTPUT=$OUT $1
 elif [ "$1" = "star6b0" ]; then
 	DRV=$PWD/firmware/general/package/sigmastar-osdrv-infinity6b0/files/lib
 	make -B CC=$GCC DRV=$DRV TOOLCHAIN=$PWD/toolchain/$CC OUTPUT=$OUT $1
 elif [ "$1" = "star6e" ]; then
 	DRV=$PWD/firmware/general/package/sigmastar-osdrv-infinity6e/files/lib
+	make -B CC=$GCC DRV=$DRV TOOLCHAIN=$PWD/toolchain/$CC OUTPUT=$OUT $1
+elif [ "$1" = "star6c" ]; then
+	DRV=$PWD/firmware/general/package/sigmastar-osdrv-infinity6c/files/lib
 	make -B CC=$GCC DRV=$DRV TOOLCHAIN=$PWD/toolchain/$CC OUTPUT=$OUT $1
 elif [ "$1" = "rockchip" ]; then
     ./build_rockchip.sh $1

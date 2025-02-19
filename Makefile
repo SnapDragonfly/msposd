@@ -33,10 +33,22 @@ hisi: version.h
 	$(eval LIB = -ldnvqe -lmpi -lsecurec -lupvqe -lVoiceEngine)
 	$(BUILD)
 
+hi3536: version.h
+	$(eval SDK = ./sdk/hi3536dv100)
+	$(eval CFLAGS += -D__GOKE__ -D__HI3536__)
+	$(eval LIB = -lm -ldnvqe -lmpi -ljpeg -lupvqe -lVoiceEngine)
+	$(BUILD)
+
 star6b0: version.h
 	$(eval SDK = ./sdk/infinity6)
 	$(eval CFLAGS += -D__SIGMASTAR__ -D__INFINITY6__ -D__INFINITY6B0__)
 	$(eval LIB = -lcam_os_wrapper -lm -lmi_rgn -lmi_sys)
+	$(BUILD)
+
+star6c: version.h
+	$(eval SDK = ./sdk/infinity6)
+	$(eval CFLAGS += -D__SIGMASTAR__ -D__INFINITY6__ -D__INFINITY6C__)
+	$(eval LIB = -lcam_os_wrapper -lmi_rgn -lmi_sys)
 	$(BUILD)
 
 star6e: version.h
